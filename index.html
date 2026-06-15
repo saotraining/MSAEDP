@@ -62,16 +62,18 @@ body {
 .banner-section {
   position: relative;
   width: 100%;
-  background: linear-gradient(180deg, #F4E4C0 0%, #EBD299 100%);
+  background: var(--bg);
   overflow: hidden;
 }
 .banner-stack {
   position: relative;
   width: 100%;
-  max-width: 1500px;
+  max-width: 1280px;
   margin: 0 auto;
   line-height: 0;
   overflow: hidden;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow-md);
 }
 .banner-img {
   width: 100%;
@@ -95,72 +97,58 @@ body {
 }
 .banner-img.loaded ~ .banner-overlay { opacity: 1; }
 
-/* Sheen — แสงกวาดซ้ายไปขวา */
+/* Sheen — แสงเงางามกวาดช้าๆ (สุขุม) */
 .sheen {
   position: absolute;
-  top: 0; left: -50%;
-  width: 50%; height: 100%;
+  top: 0; left: -60%;
+  width: 60%; height: 100%;
   background: linear-gradient(
     100deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.12) 45%,
-    rgba(255, 255, 255, 0.22) 50%,
-    rgba(255, 255, 255, 0.12) 55%,
-    transparent 70%
+    transparent 35%,
+    rgba(255, 255, 255, 0.06) 47%,
+    rgba(255, 255, 255, 0.13) 50%,
+    rgba(255, 255, 255, 0.06) 53%,
+    transparent 65%
   );
-  transform: skewX(-15deg);
-  animation: sheen-sweep 6s ease-in-out infinite;
+  transform: skewX(-14deg);
+  animation: sheen-sweep 11s ease-in-out infinite;
   mix-blend-mode: overlay;
 }
 @keyframes sheen-sweep {
-  0%   { left: -50%; }
-  50%  { left: 150%; }
-  100% { left: 150%; }
+  0%   { left: -60%; }
+  55%  { left: 160%; }
+  100% { left: 160%; }
 }
 
-/* Flow lines */
-.flow-lines {
+/* Light beams — ลำแสงทองพุ่งขึ้นช้าๆ เรียบหรู เป็นทางการ */
+.beams {
   position: absolute;
   inset: 0;
-  width: 100%; height: 100%;
-  opacity: 0.6;
+  pointer-events: none;
+  overflow: hidden;
 }
-.flow-lines path {
-  fill: none;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 4px currentColor);
+.beam {
+  position: absolute;
+  bottom: -45%;
+  width: 1.5px;
+  height: 45%;
+  background: linear-gradient(to top,
+    rgba(245, 215, 110, 0) 0%,
+    rgba(245, 215, 110, 0.30) 55%,
+    rgba(255, 240, 200, 0.55) 90%,
+    rgba(255, 240, 200, 0) 100%);
+  filter: blur(0.6px);
+  opacity: 0;
+  animation: beam-rise ease-in-out infinite;
 }
-.flow-1 {
-  stroke: rgba(245, 215, 110, 0.85);
-  stroke-width: 2.5;
-  stroke-dasharray: 100 800;
-  color: rgba(245, 215, 110, 0.85);
-  animation: flow-move-right 8s linear infinite;
-}
-.flow-2 {
-  stroke: rgba(255, 244, 214, 0.55);
-  stroke-width: 1.5;
-  stroke-dasharray: 80 600;
-  color: rgba(255, 244, 214, 0.55);
-  animation: flow-move-left 10s linear infinite;
-}
-.flow-3 {
-  stroke: rgba(189, 154, 44, 0.45);
-  stroke-width: 1;
-  stroke-dasharray: 150 500;
-  color: rgba(189, 154, 44, 0.45);
-  animation: flow-move-right 12s linear infinite;
-}
-@keyframes flow-move-right {
-  0% { stroke-dashoffset: 900; }
-  100% { stroke-dashoffset: 0; }
-}
-@keyframes flow-move-left {
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: 680; }
+@keyframes beam-rise {
+  0%   { transform: translateY(0) scaleY(0.7); opacity: 0; }
+  20%  { opacity: 0.85; }
+  80%  { opacity: 0.85; }
+  100% { transform: translateY(-150%) scaleY(1.15); opacity: 0; }
 }
 
-/* Particles */
+/* Particles — ละอองทองลอยขึ้น (เบาบาง สุขุม) */
 .particles {
   position: absolute;
   inset: 0;
@@ -169,19 +157,19 @@ body {
 }
 .particle {
   position: absolute;
-  width: 3px; height: 3px;
+  width: 2.5px; height: 2.5px;
   border-radius: 50%;
-  background: rgba(245, 215, 110, 0.7);
-  box-shadow: 0 0 4px rgba(245, 215, 110, 0.6);
+  background: rgba(245, 215, 110, 0.55);
+  box-shadow: 0 0 4px rgba(245, 215, 110, 0.45);
   bottom: -10px;
   animation: particle-rise linear infinite;
   opacity: 0;
 }
 @keyframes particle-rise {
   0%   { opacity: 0; transform: translateY(0) translateX(0); }
-  20%  { opacity: 1; }
-  80%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-100vh) translateX(var(--drift, 30px)); }
+  25%  { opacity: 0.7; }
+  75%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-100vh) translateX(var(--drift, 24px)); }
 }
 
 /* ============================
@@ -190,7 +178,7 @@ body {
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 22px 24px 0;
+  padding: 16px 24px 0;
 }
 
 /* ============================
@@ -200,22 +188,22 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .card {
   position: relative;
-  flex: 0 1 calc(33.333% - 11px);
+  flex: 0 1 calc(20% - 10px);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 20px;
+  padding: 12px 16px;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   opacity: 0;
@@ -261,30 +249,30 @@ body {
 .card:hover .card-action { color: var(--primary-deep); }
 
 .card-icon {
-  width: 46px; height: 46px;
-  border-radius: 11px;
+  width: 40px; height: 40px;
+  border-radius: 10px;
   background: var(--primary-soft);
   color: var(--primary-deep);
   display: flex; align-items: center; justify-content: center;
   transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative; z-index: 1;
 }
-.card-icon svg { width: 23px; height: 23px; stroke-width: 1.8; }
+.card-icon svg { width: 20px; height: 20px; stroke-width: 1.8; }
 
 .card-title {
   font-family: 'Prompt', sans-serif;
-  font-size: 16.5px; font-weight: 600;
+  font-size: 15px; font-weight: 600;
   color: var(--text); line-height: 1.3;
 }
 .card-desc {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
   flex-grow: 1;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 .card-footer {
   display: flex; align-items: center; justify-content: space-between;
-  margin-top: 2px; padding-top: 8px;
+  margin-top: 2px; padding-top: 6px;
   border-top: 1px solid var(--border-light);
 }
 .card-action {
@@ -304,7 +292,7 @@ body {
    CONTACT
    ============================ */
 .contact-section {
-  margin: 0 auto 22px;
+  margin: 0 auto 14px;
   max-width: 720px;
   opacity: 0;
   transform: translateY(16px);
@@ -316,7 +304,7 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px 22px;
+  padding: 10px 20px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -386,8 +374,11 @@ body {
 /* ============================
    RESPONSIVE
    ============================ */
+@media (max-width: 1200px) {
+  .card { flex: 0 1 calc(33.333% - 8px); }
+}
 @media (max-width: 980px) {
-  .card { flex: 0 1 calc(50% - 8px); }
+  .card { flex: 0 1 calc(50% - 6px); }
 }
 @media (max-width: 640px) {
   .card { flex: 0 1 100%; }
@@ -420,11 +411,7 @@ body {
 
     <div class="banner-overlay">
       <div class="sheen"></div>
-      <svg class="flow-lines" viewBox="0 0 1000 300" preserveAspectRatio="none">
-        <path class="flow-1" d="M -50,150 C 200,50 400,250 700,100 S 900,200 1050,150" />
-        <path class="flow-2" d="M 1050,200 C 800,280 600,100 300,180 S 100,80 -50,120" />
-        <path class="flow-3" d="M -50,80 C 300,180 500,20 800,220 S 950,50 1050,100" />
-      </svg>
+      <div class="beams" id="beams"></div>
       <div class="particles" id="particles"></div>
     </div>
   </div>
@@ -444,9 +431,9 @@ body {
         </svg>
       </div>
       <h2 class="card-title">เอกสารประกอบการบรรยาย</h2>
-      <p class="card-desc">เอกสารและสไลด์ประกอบการบรรยายของแต่ละวัน</p>
+      <p class="card-desc">เอกสารและสไลด์บรรยายแต่ละวัน</p>
       <div class="card-footer">
-        <span class="card-action">เปิดดูเอกสาร</span>
+        <span class="card-action">ดาวน์โหลดเอกสาร</span>
         <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
         </svg>
@@ -462,9 +449,9 @@ body {
         </svg>
       </div>
       <h2 class="card-title">สรุปเนื้อหารายวิชา (Infographic)</h2>
-      <p class="card-desc">อินโฟกราฟิกสรุปสาระสำคัญของแต่ละรายวิชา</p>
+      <p class="card-desc">ส่งและดาวน์โหลดสรุปเนื้อหารายวิชา</p>
       <div class="card-footer">
-        <span class="card-action">ดูอินโฟกราฟิก</span>
+        <span class="card-action">ส่ง / ดาวน์โหลด</span>
         <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
         </svg>
@@ -480,9 +467,9 @@ body {
         </svg>
       </div>
       <h2 class="card-title">ปันความรู้ (Morning Talk)</h2>
-      <p class="card-desc">องค์ความรู้และประเด็นแลกเปลี่ยนจากกิจกรรม Morning Talk</p>
+      <p class="card-desc">ส่งและดาวน์โหลดเอกสารปันความรู้</p>
       <div class="card-footer">
-        <span class="card-action">เปิดดูเอกสาร</span>
+        <span class="card-action">ส่ง / ดาวน์โหลด</span>
         <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
         </svg>
@@ -500,9 +487,9 @@ body {
         </svg>
       </div>
       <h2 class="card-title">รายงานผลงานทางวิชาการ</h2>
-      <p class="card-desc">รวมรายงานและผลงานทางวิชาการของผู้เข้ารับการอบรม</p>
+      <p class="card-desc">ส่งและดาวน์โหลดรายงานผลงานทางวิชาการ</p>
       <div class="card-footer">
-        <span class="card-action">เปิดดูเอกสาร</span>
+        <span class="card-action">ส่ง / ดาวน์โหลด</span>
         <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
         </svg>
@@ -518,7 +505,7 @@ body {
         </svg>
       </div>
       <h2 class="card-title">ส่งใบประกาศนียบัตร</h2>
-      <p class="card-desc">ระบบสำหรับจัดส่งไฟล์ประกาศนียบัตรหลังสำเร็จหลักสูตร</p>
+      <p class="card-desc">ส่งไฟล์ใบประกาศนียบัตรหลังจบหลักสูตร</p>
       <div class="card-footer">
         <span class="card-action">ส่งเอกสาร</span>
         <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -540,7 +527,7 @@ body {
       <div class="contact-info">
         <div class="contact-text">
           <div class="contact-label">เจ้าหน้าที่โครงการ</div>
-          <div class="contact-name">นายรังสรรค์ สินนา (เดียร์)</div>
+          <div class="contact-name">&nbsp;</div>
         </div>
         <a href="tel:022718000" class="contact-phone">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -555,19 +542,36 @@ body {
 </div>
 
 <script>
-// Generate floating particles
+// Generate rising light beams (ลำแสงพุ่งขึ้น — สุขุม)
+(function() {
+  const beams = document.getElementById('beams');
+  if (!beams) return;
+  const positions = [12, 28, 44, 60, 76, 90];
+  positions.forEach((leftPct) => {
+    const el = document.createElement('div');
+    el.className = 'beam';
+    const duration = 7 + Math.random() * 4;
+    el.style.left = leftPct + '%';
+    el.style.height = (38 + Math.random() * 18) + '%';
+    el.style.animationDuration = duration + 's';
+    el.style.animationDelay = (-Math.random() * duration) + 's';
+    beams.appendChild(el);
+  });
+})();
+
+// Generate floating particles (เบาบาง)
 (function() {
   const particles = document.getElementById('particles');
   if (!particles) return;
-  const count = 15;
+  const count = 10;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
     const left = Math.random() * 100;
-    const size = 1.5 + Math.random() * 2;
-    const duration = 10 + Math.random() * 8;
+    const size = 1.5 + Math.random() * 1.5;
+    const duration = 13 + Math.random() * 9;
     const delay = -Math.random() * duration;
-    const drift = (Math.random() - 0.5) * 100;
+    const drift = (Math.random() - 0.5) * 80;
     p.style.left = left + '%';
     p.style.width = size + 'px';
     p.style.height = size + 'px';
