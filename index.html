@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โครงการพัฒนานักบริหารการตรวจเงินแผ่นดินระดับกลาง (นตก.) รุ่นที่ 4</title>
+<meta name="description" content="เว็บไซต์โครงการพัฒนานักบริหารการตรวจเงินแผ่นดินระดับกลาง (นตก.) รุ่นที่ 4 — รวมเอกสารประกอบการบรรยาย อินโฟกราฟิกสรุปรายวิชา กิจกรรมปันความรู้ (Morning Talk) รายงานผลงานทางวิชาการ และระบบส่งใบประกาศนียบัตร">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="โครงการพัฒนานักบริหารการตรวจเงินแผ่นดินระดับกลาง (นตก.) รุ่นที่ 4">
+<meta property="og:description" content="ศูนย์รวมเอกสารและทรัพยากรการเรียนรู้สำหรับผู้เข้ารับการอบรม โครงการ นตก. รุ่นที่ 4">
+<meta property="og:image" content="https://rangsansinna-ship-it.github.io/natok-4/banner.jpg">
+<meta property="og:url" content="https://rangsansinna-ship-it.github.io/natok-4/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="โครงการพัฒนานักบริหารการตรวจเงินแผ่นดินระดับกลาง (นตก.) รุ่นที่ 4">
+<meta name="twitter:description" content="ศูนย์รวมเอกสารและทรัพยากรการเรียนรู้สำหรับผู้เข้ารับการอบรม โครงการ นตก. รุ่นที่ 4">
+<meta name="twitter:image" content="https://rangsansinna-ship-it.github.io/natok-4/banner.jpg">
+<link rel="icon" type="image/png" href="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* ===== โทนเบอร์กันดี-ทอง-ครีม (เข้าชุดกับ banner) ===== */
+  --bg: #FAF3E6;
+  --surface: #FFFFFF;
+  --border: #ECDFC6;
+  --border-light: #F5EDDD;
+  --primary: #8A1E2D;
+  --primary-deep: #5E1019;
+  --primary-soft: #F7E7E3;
+  --primary-light: #D9A8A6;
+  --gold: #BD9A2C;
+  --gold-light: #E6C75C;
+  --text: #2B1519;
+  --text-muted: #7C5D52;
+  --text-soft: #A98F7F;
+  --shadow-sm: 0 1px 2px rgba(94, 16, 25, 0.05);
+  --shadow-md: 0 4px 12px rgba(94, 16, 25, 0.09);
+  --shadow-lg: 0 8px 24px rgba(94, 16, 25, 0.13);
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================
+   BANNER
+   ============================ */
+.banner-section {
+  position: relative;
+  width: 100%;
+  background: var(--bg);
+  overflow: hidden;
+}
+.banner-stack {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow-md);
+}
+.banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.banner-img.loaded { opacity: 1; }
+
+/* ============================
+   ANIMATED OVERLAY
+   ============================ */
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.banner-img.loaded ~ .banner-overlay { opacity: 1; }
+
+/* Sheen — แสงเงางามกวาดช้าๆ (สุขุม) */
+.sheen {
+  position: absolute;
+  top: 0; left: -60%;
+  width: 60%; height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.06) 47%,
+    rgba(255, 255, 255, 0.13) 50%,
+    rgba(255, 255, 255, 0.06) 53%,
+    transparent 65%
+  );
+  transform: skewX(-14deg);
+  animation: sheen-sweep 11s ease-in-out infinite;
+  mix-blend-mode: overlay;
+}
+@keyframes sheen-sweep {
+  0%   { left: -60%; }
+  55%  { left: 160%; }
+  100% { left: 160%; }
+}
+
+/* Light beams — ลำแสงทองพุ่งขึ้นช้าๆ เรียบหรู เป็นทางการ */
+.beams {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.beam {
+  position: absolute;
+  bottom: -45%;
+  width: 1.5px;
+  height: 45%;
+  background: linear-gradient(to top,
+    rgba(245, 215, 110, 0) 0%,
+    rgba(245, 215, 110, 0.30) 55%,
+    rgba(255, 240, 200, 0.55) 90%,
+    rgba(255, 240, 200, 0) 100%);
+  filter: blur(0.6px);
+  opacity: 0;
+  animation: beam-rise ease-in-out infinite;
+}
+@keyframes beam-rise {
+  0%   { transform: translateY(0) scaleY(0.7); opacity: 0; }
+  20%  { opacity: 0.85; }
+  80%  { opacity: 0.85; }
+  100% { transform: translateY(-150%) scaleY(1.15); opacity: 0; }
+}
+
+/* Particles — ละอองทองลอยขึ้น (เบาบาง สุขุม) */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2.5px; height: 2.5px;
+  border-radius: 50%;
+  background: rgba(245, 215, 110, 0.55);
+  box-shadow: 0 0 4px rgba(245, 215, 110, 0.45);
+  bottom: -10px;
+  animation: particle-rise linear infinite;
+  opacity: 0;
+}
+@keyframes particle-rise {
+  0%   { opacity: 0; transform: translateY(0) translateX(0); }
+  25%  { opacity: 0.7; }
+  75%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-100vh) translateX(var(--drift, 24px)); }
+}
+
+/* ============================
+   MAIN CONTENT
+   ============================ */
+.main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+}
+
+/* ============================
+   CARDS GRID (5 การ์ด — แถวสุดท้ายจัดกึ่งกลาง)
+   ============================ */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card {
+  position: relative;
+  flex: 0 1 calc(20% - 10px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+}
+.card.visible { opacity: 1; transform: translateY(0); }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 70px; height: 70px;
+  background: radial-gradient(circle at top right, var(--primary-soft) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--primary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.card:hover::before { opacity: 1; }
+.card:hover::after { transform: scaleX(1); }
+.card:hover .card-icon {
+  background: var(--primary);
+  color: var(--surface);
+  transform: scale(1.08) rotate(-5deg);
+}
+.card:hover .card-arrow {
+  transform: translateX(5px);
+  color: var(--primary);
+}
+.card:hover .card-action { color: var(--primary-deep); }
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; z-index: 1;
+}
+.card-icon svg { width: 20px; height: 20px; stroke-width: 1.8; }
+
+.card-title {
+  font-family: 'Prompt', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text); line-height: 1.3;
+}
+.card-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  flex-grow: 1;
+  line-height: 1.45;
+}
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 2px; padding-top: 6px;
+  border-top: 1px solid var(--border-light);
+}
+.card-action {
+  font-family: 'Prompt', sans-serif;
+  font-size: 12.5px; font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.2px;
+  transition: color 0.28s ease;
+}
+.card-arrow {
+  color: var(--text-soft);
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+/* ============================
+   CONTACT
+   ============================ */
+.contact-section {
+  margin: 0 auto 14px;
+  max-width: 720px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: all 0.5s ease;
+}
+.contact-section.visible { opacity: 1; transform: translateY(0); }
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--gold), var(--primary));
+}
+.contact-icon {
+  width: 44px; height: 44px;
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.contact-icon svg { width: 22px; height: 22px; stroke-width: 2; }
+.contact-card:hover .contact-icon {
+  background: var(--primary);
+  color: var(--surface);
+}
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+.contact-text { line-height: 1.3; }
+.contact-label {
+  font-family: 'Prompt', sans-serif;
+  font-size: 11px; font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.contact-name {
+  font-family: 'Prompt', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
+  margin-top: 2px;
+}
+.contact-phone {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  background: var(--bg);
+  border-radius: 100px;
+  transition: all 0.25s ease;
+  font-family: 'Prompt', sans-serif;
+  font-weight: 500;
+  margin-left: auto;
+}
+.contact-phone:hover {
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+}
+.contact-phone svg { width: 14px; height: 14px; stroke-width: 2; }
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 1200px) {
+  .card { flex: 0 1 calc(33.333% - 8px); }
+}
+@media (max-width: 980px) {
+  .card { flex: 0 1 calc(50% - 6px); }
+}
+@media (max-width: 640px) {
+  .card { flex: 0 1 100%; }
+  .contact-card { flex-direction: column; gap: 12px; text-align: center; }
+  .contact-info { flex-direction: column; gap: 8px; text-align: center; }
+  .contact-phone { margin-left: 0; }
+  .main-content { padding: 18px 16px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.card:focus-visible,
+.contact-phone:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<section class="banner-section">
+  <div class="banner-stack">
+    <img class="banner-img" id="bannerImg" src="banner.jpg"
+         alt="โครงการพัฒนานักบริหารการตรวจเงินแผ่นดินระดับกลาง (นตก.) รุ่นที่ 4">
+
+    <div class="banner-overlay">
+      <div class="sheen"></div>
+      <div class="beams" id="beams"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+  </div>
+</section>
+
+<div class="main-content">
+
+  <!-- CARDS -->
+  <main class="grid">
+
+    <!-- 1. เอกสารประกอบการบรรยาย -->
+    <a href="https://drive.google.com/drive/folders/1M3pb8trmjpO-4hMH5WwSIuHbU-221NoU?usp=sharing"
+       target="_blank" rel="noopener" class="card">
+      <div class="card-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <h2 class="card-title">เอกสารประกอบการบรรยาย</h2>
+      <p class="card-desc">เอกสารและสไลด์บรรยายแต่ละวัน</p>
+      <div class="card-footer">
+        <span class="card-action">ดาวน์โหลดเอกสาร</span>
+        <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- 2. สรุปเนื้อหารายวิชา (Infographic) -->
+    <a href="https://drive.google.com/drive/folders/16gVd536ZctghYmh70rRP1gNY6So8KxdM?usp=sharing"
+       target="_blank" rel="noopener" class="card">
+      <div class="card-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <h2 class="card-title">สรุปเนื้อหารายวิชา (Infographic)</h2>
+      <p class="card-desc">ส่งและดาวน์โหลดสรุปเนื้อหารายวิชา</p>
+      <div class="card-footer">
+        <span class="card-action">ส่ง / ดาวน์โหลด</span>
+        <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- 3. ปันความรู้ (Morning Talk) -->
+    <a href="https://drive.google.com/drive/folders/1FPKNJqZLdLuQG_42iqp6_WGdN-O_Imrl?usp=sharing"
+       target="_blank" rel="noopener" class="card">
+      <div class="card-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+        </svg>
+      </div>
+      <h2 class="card-title">ปันความรู้ (Morning Talk)</h2>
+      <p class="card-desc">ส่งและดาวน์โหลดเอกสารปันความรู้</p>
+      <div class="card-footer">
+        <span class="card-action">ส่ง / ดาวน์โหลด</span>
+        <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- 4. รายงานผลงานทางวิชาการ -->
+    <a href="https://drive.google.com/drive/folders/1eMC6XFkWN8rohZJ7Vm2BlGY6ZigRk2Dt?usp=sharing"
+       target="_blank" rel="noopener" class="card">
+      <div class="card-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
+        </svg>
+      </div>
+      <h2 class="card-title">รายงานผลงานทางวิชาการ</h2>
+      <p class="card-desc">ส่งและดาวน์โหลดรายงานผลงานทางวิชาการ</p>
+      <div class="card-footer">
+        <span class="card-action">ส่ง / ดาวน์โหลด</span>
+        <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- 5. ส่งใบประกาศนียบัตร -->
+    <a href="https://drive.google.com/drive/folders/18qNWb1m0_mThdWJtOzz8zo0ILAqW3KNY?usp=sharing"
+       target="_blank" rel="noopener" class="card">
+      <div class="card-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+      </div>
+      <h2 class="card-title">ส่งใบประกาศนียบัตร</h2>
+      <p class="card-desc">ส่งไฟล์ใบประกาศนียบัตรหลังจบหลักสูตร</p>
+      <div class="card-footer">
+        <span class="card-action">ส่งเอกสาร</span>
+        <svg class="card-arrow" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </div>
+    </a>
+
+  </main>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+        </svg>
+      </div>
+      <div class="contact-info">
+        <div class="contact-text">
+          <div class="contact-label">เจ้าหน้าที่โครงการ</div>
+          <div class="contact-name">&nbsp;</div>
+        </div>
+        <a href="tel:022718000" class="contact-phone">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+          <span>02-271-8000 ต่อ 1733</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// Generate rising light beams (ลำแสงพุ่งขึ้น — สุขุม)
+(function() {
+  const beams = document.getElementById('beams');
+  if (!beams) return;
+  const positions = [12, 28, 44, 60, 76, 90];
+  positions.forEach((leftPct) => {
+    const el = document.createElement('div');
+    el.className = 'beam';
+    const duration = 7 + Math.random() * 4;
+    el.style.left = leftPct + '%';
+    el.style.height = (38 + Math.random() * 18) + '%';
+    el.style.animationDuration = duration + 's';
+    el.style.animationDelay = (-Math.random() * duration) + 's';
+    beams.appendChild(el);
+  });
+})();
+
+// Generate floating particles (เบาบาง)
+(function() {
+  const particles = document.getElementById('particles');
+  if (!particles) return;
+  const count = 10;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const left = Math.random() * 100;
+    const size = 1.5 + Math.random() * 1.5;
+    const duration = 13 + Math.random() * 9;
+    const delay = -Math.random() * duration;
+    const drift = (Math.random() - 0.5) * 80;
+    p.style.left = left + '%';
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.animationDuration = duration + 's';
+    p.style.animationDelay = delay + 's';
+    p.style.setProperty('--drift', drift + 'px');
+    particles.appendChild(p);
+  }
+})();
+
+// Banner loader
+const bannerImg = document.getElementById('bannerImg');
+function handleBannerLoad() { bannerImg.classList.add('loaded'); }
+if (bannerImg.complete && bannerImg.naturalWidth > 0) {
+  handleBannerLoad();
+} else {
+  bannerImg.addEventListener('load', handleBannerLoad);
+}
+
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const delay = entry.target.classList.contains('card')
+        ? Array.from(entry.target.parentElement.children).indexOf(entry.target) * 60
+        : 0;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+document.querySelectorAll('.card, .contact-section').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
